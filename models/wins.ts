@@ -7,7 +7,7 @@ export interface Win {
   type: string
 }
 
-export interface NewWin {
+export interface WinData {
   name: string
   title: string
   win: string
