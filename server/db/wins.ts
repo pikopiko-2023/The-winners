@@ -1,8 +1,10 @@
 import connection from './connection.ts'
 import { Win, NewWin } from '../../models/wins.ts'
 
+const db = connection
+
 // Get all wins
-export async function getAllWins(db = connection): Promise<Win[]> {
+export async function getAllWins(): Promise<Win[]> {
   return db('wins').select()
 }
 
@@ -11,12 +13,12 @@ export function deleteWin(id: number): Promise<number> {
   return connection('wins').where({ id }).del() 
 }
 
-// By Type
+// By Type - Maybe we don't need this?
 export function getWinsByType(type: string): Promise<Win[]> {
   return connection('wins').where({ type }).select()
 }
 
-// By Id
+// By Id - Maybe we don't need this?
 export function getWinById(id: number): Promise<Win[]> {
   return connection('wins').where({ id }).select()
 }
@@ -27,4 +29,3 @@ export function addWin(win: NewWin): Promise<Win> {
     .insert({ ...win }) 
     .returning(['id', 'name', 'title', 'win', 'date', 'type' ]) 
 }
-
