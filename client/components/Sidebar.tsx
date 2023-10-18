@@ -3,7 +3,7 @@ import Nav from './Nav.tsx'
 
 function Sidebar() {
   return (
-    <div>
+    <div className= 'sidebar' >
       <Header />
       <Nav />
     </div>

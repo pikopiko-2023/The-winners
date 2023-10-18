@@ -1,18 +1,15 @@
-// import { useWins } from '../hooks/useWins.ts'
-// import { Win } from '../../models/wins.ts'
-import { Outlet } from 'react-router-dom'
-import Sidebar from './Sidebar.tsx'
+import { useWins } from '../hooks/useWins.ts'
+import { Win } from '../../models/wins.ts'
 
-function App() {
-  // const { data } = useWins()
 
+function WinsList() {
+   const { data } = useWins()
+  
   return (
     <>
-      <div className="app">
-        <Sidebar />
-        <Outlet />
-
-        {/* <div>
+      <div className="section">
+        
+          <div>
           {data ? (
             data.map((win: Win, index: number) => (
               <div key={index}>
@@ -27,10 +24,10 @@ function App() {
           ) : (
             <p>Loading...</p>
           )}
-        </div> */}
+        </div>
       </div>
     </>
   )
 }
 
-export default App
+export default WinsList

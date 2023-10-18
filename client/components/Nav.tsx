@@ -1,8 +1,10 @@
 function Nav() {
   return (
-    <div>
-      <p>Home</p>
-      <p>AddWin</p>
+    <div className="nav">
+      <ul>
+      <li>Home</li>
+      <li>AddWin</li>
+      </ul>
     </div>
   )
 }
