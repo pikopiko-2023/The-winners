@@ -7,6 +7,10 @@ export interface Win {
   type: string
 }
 
-// export interface FruitData {
-//   name: string
-// }
+export interface NewWin {
+  name: string
+  title: string
+  win: string
+  date: string
+  type: string
+}
