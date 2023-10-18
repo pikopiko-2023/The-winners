@@ -1,9 +1,9 @@
 export async function seed(knex) {
   // Deletes ALL existing entries
-  await knex('fruit').del()
+  await knex('wins').del()
 
   // Inserts seed entries
-  await knex('achievements').insert([
+  await knex('wins').insert([
     {
       id: 1,
       name: 'Mark',

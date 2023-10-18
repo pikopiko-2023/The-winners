@@ -1,7 +1,7 @@
 export async function up (knex) {
   return knex.schema.createTable('wins', (table) => {
-    table.increments('id')
-    table.increments('name')
+    table.increments('id').primary()
+    table.string('name')
     table.string('title')
     table.string('win')
     table.string('date')
