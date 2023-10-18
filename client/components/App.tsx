@@ -1,5 +1,6 @@
 import { useWins } from '../hooks/useWins.ts'
 import { Win } from '../../models/wins.ts'
+import Sidebar from './Sidebar.tsx'
 
 function App() {
   const { data } = useWins()
@@ -7,8 +8,10 @@ function App() {
   return (
     <>
       <div className="app">
-        <h1>Fullstack Boilerplate - with Winners!</h1>
-        <div>
+        <Sidebar />
+        <Outlet/>
+
+        {/* <div>
           {data ? (
             data.map((win: Win, index: number) => (
               <div key={index}>
@@ -23,7 +26,7 @@ function App() {
           ) : (
             <p>Loading...</p>
           )}
-        </div>
+        </div> */}
       </div>
     </>
   )
