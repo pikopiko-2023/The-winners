@@ -1,4 +1,5 @@
 import { Win } from '../../models/wins.tsx'
+import LikeButton from './LikeButton.tsx'
 // display a single win, pass win from winlist into this //
 interface Props {
   win: Win
@@ -15,6 +16,7 @@ export function WinDetails(props: Props) {
         <h3>{win.name}</h3>
         <h4>{win.date}</h4>
         <p>{win.win}</p>
+        <LikeButton postId={'win.id'} />
       </div>
     </>
   )
