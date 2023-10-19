@@ -1,6 +1,6 @@
 import { Router } from 'express'
 
-import * as db from '../db/wins.ts'
+import * as db from '../db/winsDb.ts'
 import { WinData } from '../../models/wins.ts'
 
 const router = Router()

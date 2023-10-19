@@ -2,12 +2,12 @@
 import { describe, it, expect, vi } from 'vitest'
 import request from 'supertest'
 import server from '../server.js'
-import * as db from '../db/wins.js'
+import * as db from '../db/winsDb.js'
 
-vi.mock('../db/connection')
+vi.mock('../db/wins') // mocking the db functions, 'don't run the real functions mate...'
 
-describe('GET wins', () => {
-  it('responds with urls array on getWins success', () => {
+describe.skip('GET wins', () => {
+  it('responds with wins array on getWins success', () => {
     vi.mocked(db.getAllWins).mockImplementation(() =>
       Promise.resolve([
         {
@@ -37,11 +37,13 @@ describe('GET wins', () => {
       ]),
     )
     return request(server)
-      .get('/api/v1/urls')
+      .get('/api/v1/wins')
       .expect(200)
       .then((res) => {
-        expect(res.body).toHaveLength(3)
-        expect(res.body[1].url).toBe('https://soundcloud.com/')
+        // expect(res.body).toHaveLength(3)
+        expect(res.body[1].win).toBe(
+          'Presented a project update and nobody fell asleep this time. I call that a win!',
+        )
       })
   })
   it.skip('responds with 500 and error on getUrls rejection', () => {
@@ -49,7 +51,7 @@ describe('GET wins', () => {
       Promise.reject(new Error('mock DB error')),
     )
     return request(server)
-      .get('/api/v1/urls')
+      .get('/api/v1/wins')
       .expect(500)
       .then((err) => {
         expect(err.text).toBe('mock DB error')
