@@ -9,14 +9,11 @@ const router = Router()
 router.get('/', async (req, res) => {
   try {
     const wins = await db.getAllWins()
-    res.json({ wins }) // This is correct and equivalent to res.json({ wins: wins })
+    res.json({ wins }) // res.json({ wins: wins })
   } catch (error) {
-    console.error('Error message:', error.message)
-    console.error('Error stack:', error.stack)
     res.status(500).json({ message: 'error' })
   }
 })
-
 
 // GET /api/v1/wins/:winId
 router.get('/:winId', async (req, res) => {
@@ -55,7 +52,7 @@ router.post('/', async (req, res) => {
       return
     }
     const win = await db.addWin(newWin)
-    res.json({ win })
+    res.json({ win }) // just the newly added win right?
   } catch (error) {
     console.log(error)
     res.sendStatus(500)

@@ -76,7 +76,7 @@ describe('newWin', () => {
 
 describe('deleteWin', () => {
   it('deletes a win by id and returns the number of rows affected', async () => {
-    // Arrange: Ensure there's a URL to delete.
+    // Arrange: Ensure there's a Win to delete.
     const newWinData: WinData = {
       name: 'Test Name',
       title: 'went a little crazy',

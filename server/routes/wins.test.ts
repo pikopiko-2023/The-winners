@@ -3,6 +3,7 @@ import { describe, it, expect, vi } from 'vitest'
 import request from 'supertest'
 import server from '../server.js'
 import * as db from '../db/winsDb.js'
+import { WinData, Win } from '../../models/wins.js'
 
 vi.mock('../db/winsDb') // mocking the db functions, 'don't run the real functions mate...'
 
@@ -55,7 +56,7 @@ describe('GET wins', () => {
   describe('POST /api/v1/wins', () => {
     it('responds with added win on successful POST', () => {
       // Define the request body data for the POST request.
-      const newWin = {
+      const newWin: WinData = {
         name: 'Mark',
         title: 'Personality Normalisation',
         win: 'The medicine kicked in',
@@ -63,8 +64,8 @@ describe('GET wins', () => {
         type: 'Life',
       }
 
-      // Mock the newUrl function to return the added URL data.
-      vi.mocked(db.addWin).mockImplementation(() => Promise.resolve(newWin))
+      // Mock the newWin function to return the added Win data.
+      vi.mocked(db.addWin).mockImplementation(() => Promise.resolve(newWin as Win))
 
       return request(server)
         .post('/api/v1/wins')
