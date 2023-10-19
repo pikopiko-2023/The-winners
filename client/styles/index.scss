@@ -1,6 +1,80 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;700&display=swap');
-
-html, 
-body {
-  font-family: 'Montserrat', sans-serif;
+/* Reset default margin and padding */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
+
+
+/* Define basic styling for the body and layout */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+}
+
+
+.app {
+  display: flex;
+  min-width: 100vw;
+ 
+}
+
+
+.sidebar {
+  width: 20%;
+  background-color: #82bebd;
+  color: #fff;
+  min-height: 100vh
+ 
+}
+
+
+.header {
+  background-color: #82bebd;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+}
+
+
+.nav {
+  padding: 10px;
+  text-align: center;
+  ul {
+    list-style: none;
+   
+    li {
+      margin: 10px 0;
+      padding: 2px;
+      a {
+        color: #fff;
+        text-decoration: none;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
+
+
+.section {
+  width: 80%;
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  color: black
+ 
+}
+
+
+.win-box {
+  margin-bottom: 20px;
+  background-color: #fff;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+

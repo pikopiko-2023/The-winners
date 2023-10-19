@@ -1,6 +1,6 @@
 import { Router } from 'express'
 
-import * as db from '../db/wins.ts'
+import * as db from '../db/winsDb.ts'
 import { WinData } from '../../models/wins.ts'
 
 const router = Router()
@@ -9,10 +9,9 @@ const router = Router()
 router.get('/', async (req, res) => {
   try {
     const wins = await db.getAllWins()
-    res.json({ wins }) // just res.json({wins})???
+    res.json({ wins }) // res.json({ wins: wins })
   } catch (error) {
-    console.log(error)
-    res.status(500).json({ message: 'Something went wrong' })
+    res.status(500).json({ message: 'error' })
   }
 })
 
@@ -53,7 +52,7 @@ router.post('/', async (req, res) => {
       return
     }
     const win = await db.addWin(newWin)
-    res.json({ win })
+    res.json({ win }) // just the newly added win right?
   } catch (error) {
     console.log(error)
     res.sendStatus(500)
