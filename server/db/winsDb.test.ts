@@ -74,28 +74,28 @@ describe('newWin', () => {
   })
 })
 
-describe('deleteUrl', () => {
+describe('deleteWin', () => {
   it('deletes a win by id and returns the number of rows affected', async () => {
     // Arrange: Ensure there's a URL to delete.
-    const newUrlData: WinData = {
+    const newWinData: WinData = {
       name: 'Test Name',
       title: 'went a little crazy',
       win: 'a thing I did',
       date: 'todays date lol',
       type: 'dev madness',
     }
-    const addedUrlArray = await addWin(newUrlData)
-    const addedUrl = addedUrlArray[0]
+    const addedWinArray = await addWin(newWinData)
+    const addedWin = addedWinArray[0]
 
     // Act: Call the function to be tested.
-    const result = await deleteWin(addedUrl.id)
+    const result = await deleteWin(addedWin.id)
 
     // Assert: Check the function's return value and side effects.
     expect(result).toBe(1) // 1 row should have been deleted.
 
     // Optionally, verify the URL was actually deleted by trying to fetch it.
     const urls = await getAllWins()
-    expect(urls).not.toContainEqual(addedUrl)
+    expect(urls).not.toContainEqual(addedWin)
   })
 })
 

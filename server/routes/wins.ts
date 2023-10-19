@@ -9,12 +9,14 @@ const router = Router()
 router.get('/', async (req, res) => {
   try {
     const wins = await db.getAllWins()
-    res.json({ wins }) // just res.json({wins})???
+    res.json({ wins }) // This is correct and equivalent to res.json({ wins: wins })
   } catch (error) {
-    console.log(error)
-    res.status(500).json({ message: 'Something went wrong' })
+    console.error('Error message:', error.message)
+    console.error('Error stack:', error.stack)
+    res.status(500).json({ message: 'error' })
   }
 })
+
 
 // GET /api/v1/wins/:winId
 router.get('/:winId', async (req, res) => {
