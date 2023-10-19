@@ -1,5 +1,6 @@
 import { useWins } from '../hooks/useWins.ts'
 import { Win } from '../../models/wins.ts'
+import WinDetails from './WinDetails.tsx'
 
 function WinsList() {
   const { data } = useWins()
