@@ -1,5 +1,5 @@
 import connection from './connection.ts'
-import { Win, NewWin } from '../../models/wins.ts'
+import { Win, WinData } from '../../models/wins.ts'
 
 const db = connection
 
@@ -24,7 +24,7 @@ export function getWinById(id: number): Promise<Win[]> {
 }
 
 // New Win    
-export function addWin(win: NewWin): Promise<Win> {
+export function addWin(win: WinData): Promise<Win> {
   return connection<Win>('wins') 
     .insert({ ...win }) 
     .returning(['id', 'name', 'title', 'win', 'date', 'type' ]) 
