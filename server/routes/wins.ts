@@ -59,4 +59,13 @@ router.post('/', async (req, res) => {
   }
 })
 
+// Define a PATCH route to update a url by its ID.
+router.patch('/:id', async (req, res) => {
+  const WinId = Number(req.params.id) // Retrieve the url ID from the route parameters and convert it to a number.
+  const updatedData = req.body // Retrieve the updated data from the request body.
+
+  const updatedWin = await db.updateWin(WinId, updatedData) // Use the updateUrl function to update the url in the database and await the promise it returns.
+  res.json(updatedWin[0]) // Respond with the data of the updated url in JSON format.
+})
+
 export default router

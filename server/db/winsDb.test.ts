@@ -11,6 +11,7 @@ import {
   getWinsByType,
   getWinById,
   addWin,
+  updateWin
 } from './winsDb.ts'
 
 import { WinData } from '../../models/wins.ts'
@@ -132,3 +133,36 @@ describe('getWinsById', () => {
   })
 })
 
+describe('updateWin', () => {
+  it('updates a win by id and returns the updated win', async () => {
+    // Arrange: Ensure there is a win in the database to update.
+    const initialWinData = {
+      name: 'Mark',
+      title: 'First React App',
+      win: 'Successfully created my first React app and deployed it on Netlify.',
+      date: '2023-08-15',
+      type: 'Dev',
+    }
+    const addedWinArray = await addWin(initialWinData)
+    const existingWin = addedWinArray[0] // Renamed to existingWin to indicate the existing record
+
+    // New data for updating the win.
+    const updatedWinData = {
+      name: 'updated Mark',
+      title: 'updated First React App',
+      win: 'updated Successfully created my first React app and deployed it on Netlify.',
+      date: 'updated 2023-08-15',
+      type: 'updated Dev',
+    }
+
+    // Act: Call the function to be tested.
+    const updatedWinArray = await updateWin(existingWin.id, updatedWinData) // Renamed to updatedWinArray
+    const updatedWin = updatedWinArray[0] // Renamed to updatedWin to indicate the updated record
+
+    // Assert: Check the function's return value.
+    expect(updatedWin.id).toBe(existingWin.id)
+    expect(updatedWin.name).toBe('updated Mark')
+    expect(updatedWin.title).toBe('updated First React App')
+  })
+})
+ 

@@ -79,3 +79,34 @@ describe('GET wins', () => {
 
   })
 })
+
+
+ 
+describe('PATCH /api/v1/wins/:id', () => {
+  it('responds with updated win on successful PATCH', async () => {
+    // Define the ID of the win to update and the data to update it with.
+    const winId = 1;
+    const updatedWinData: WinData = {
+      name: 'Updated Mark',
+      title: 'Updated First React App',
+      win: 'Updated success message',
+      date: '2023-08-16',
+      type: 'Dev',
+    };
+
+    // Mock the updateWin function to return the updated Win data.
+    vi.mocked(db.updateWin).mockImplementation(() => Promise.resolve([updatedWinData]));
+
+    // Send the PATCH request to update the win.
+    const res = await request(server)
+      .patch(`/api/v1/wins/${winId}`)
+      .send(updatedWinData)  // Send the updated data in the request body.
+      .expect(200);  // Expect a successful response status code.
+
+    // Expect the response body to contain the updated win data.
+    expect(res.body).toEqual(updatedWinData);
+  });
+});
+
+
+
