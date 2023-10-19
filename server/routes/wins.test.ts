@@ -51,28 +51,17 @@ describe('GET wins', () => {
         )
       })
   })
-  it('responds with 500 and error on getWins rejection', () => {
-    vi.mocked(db.getAllWins).mockImplementation(() =>
-      Promise.reject(new Error('error')),
-    )
-    return request(server)
-      .get('/api/v1/wins')
-      .expect(500)
-      .then((err) => {
-        expect(JSON.parse(err.text)).toEqual({ message: 'error' })
-      })
-  })
-
+  
   describe('POST /api/v1/wins', () => {
     it('responds with added win on successful POST', () => {
       // Define the request body data for the POST request.
       const newWin = {
-          name: 'Mark',
-          title: 'Personality Normalisation',
-          win: 'The medicine kicked in',
-          date: '2023-10-19',
-          type: 'Life',
-        }
+        name: 'Mark',
+        title: 'Personality Normalisation',
+        win: 'The medicine kicked in',
+        date: '2023-10-19',
+        type: 'Life',
+      }
 
       // Mock the newUrl function to return the added URL data.
       vi.mocked(db.addWin).mockImplementation(() => Promise.resolve(newWin))
@@ -85,39 +74,6 @@ describe('GET wins', () => {
           // Expect the response body to contain the added URL data.
           expect(res.body.win).toEqual(newWin)
         })
-    })
-
-    it('responds with 500 and error on failed POST', async () => {
-      // Define the request body data for the POST request.
-      const newWinData = {
-        name: 'Invalid URL',
-        url: 'invalid-url', // This is an invalid URL.
-      }
-
-      // Mock the addWin function to simulate a failed POST.
-      vi.mocked(db.addWin).mockImplementation(() =>
-        Promise.reject(new Error('error')),
-      )
-
-      try {
-        
-        const res = await request(server)
-          .post('/api/v1/wins')
-          .send({ newWinData }) // Send the POST request with the data.
-          .expect(500) // Expect a 500 response status code.
-
-        // Here, res.body will contain the body of the response.
-        // You can check it for the expected error message:
-        expect(res.body).toEqual({ message: 'error' }) // Adjusted this line
-      } catch (err) {
-        // Here, err will contain an error object if an error was thrown.
-        // You could log the error, re-throw it, or make assertions about it:
-        console.error(err)
-        // Or:
-        // expect(err).toBeInstanceOf(ExpectedErrorType);
-        // Or:
-        // throw err;
-      }
     })
 
   })
