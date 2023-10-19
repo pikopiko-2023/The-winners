@@ -1,6 +1,6 @@
 import { Win } from '../../models/wins.tsx'
 import LikeButton from './LikeButton.tsx'
-// display a single win, pass win from winlist into this //
+// display a single win, pass win from WinsList.tsx into this //
 interface Props {
   win: Win
 }
