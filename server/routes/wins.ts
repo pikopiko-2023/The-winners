@@ -1,6 +1,6 @@
 import { Router } from 'express'
 
-import * as db from '../db/wins.ts'
+import * as db from '../db/winsDb.ts'
 import { WinData } from '../../models/wins.ts'
 
 const router = Router()
@@ -9,10 +9,9 @@ const router = Router()
 router.get('/', async (req, res) => {
   try {
     const wins = await db.getAllWins()
-    res.json({ wins }) // just res.json({wins})???
+    res.json({ wins }) // res.json({ wins: wins })
   } catch (error) {
-    console.log(error)
-    res.status(500).json({ message: 'Something went wrong' })
+    res.status(500).json({ message: 'error' })
   }
 })
 
@@ -53,11 +52,20 @@ router.post('/', async (req, res) => {
       return
     }
     const win = await db.addWin(newWin)
-    res.json({ win })
+    res.json({ win }) // just the newly added win right?
   } catch (error) {
     console.log(error)
     res.sendStatus(500)
   }
+})
+
+// Define a PATCH route to update a url by its ID.
+router.patch('/:id', async (req, res) => {
+  const WinId = Number(req.params.id) // Retrieve the url ID from the route parameters and convert it to a number.
+  const updatedData = req.body // Retrieve the updated data from the request body.
+
+  const updatedWin = await db.updateWin(WinId, updatedData) // Use the updateUrl function to update the url in the database and await the promise it returns.
+  res.json(updatedWin[0]) // Respond with the data of the updated url in JSON format.
 })
 
 export default router

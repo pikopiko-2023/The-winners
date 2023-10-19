@@ -10,14 +10,7 @@ function WinsList() {
         <div>
           {data ? (
             data.map((win: Win, index: number) => (
-              <div key={index}>
-                <hr></hr>
-                <h2>{win.title}</h2>
-                <h3>{win.name}</h3>
-                <h4>{win.date}</h4>
-                <p>{win.win}</p>
-                <hr></hr>
-              </div>
+              <WinDetails win={win} key={index} />
             ))
           ) : (
             <p>Loading...</p>
