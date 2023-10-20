@@ -2,12 +2,13 @@ import { useState } from 'react'
 import { FaHeart } from 'react-icons/fa'
 
 interface LikeButtonProps {
-  postId: string
+  postId: number
   // Need to sort out correct Id for posts & comments
 }
 
 // What is already created instead of postId?j
 const LikeButton: React.FC<LikeButtonProps> = ({ postId }) => {
+  // ({ postId }) is ok for now and can be changed in the future
   const [liked, setLiked] = useState(false)
 
   const handleLikeClick = () => {
