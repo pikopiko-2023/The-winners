@@ -4,7 +4,7 @@ import {
   useQueryClient,
   MutationFunction,
 } from '@tanstack/react-query'
-import { getWins } from '../apis/wins.ts'
+import { getWins, deleteWin } from '../apis/wins.ts'
 import { Win } from '../../models/wins.ts'
 
 export function useWins() {
@@ -29,6 +29,6 @@ export function useWinsMutation<TData = unknown, TVariables = unknown>(
 }
 
 // Query functions go here e.g. useAddFruit
-/* function useAddFruit() {
-  return useFruitsMutation(addFruit)
-} */
+export function useDeleteWin() {
+  return useWinsMutation(deleteWin)
+}
