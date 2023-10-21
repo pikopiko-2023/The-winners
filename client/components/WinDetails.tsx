@@ -1,9 +1,8 @@
 import { Win } from '../../models/wins.tsx'
 
 import LikeButton from './LikeButton.tsx'
-// display a single win, pass win from WinsList.tsx into this //
-import { deleteWin } from '../apis/wins.ts'
-// display a single win, pass win from winlist into this //
+import {useDeleteWin} from '../hooks/useWins.ts'
+
 
 interface Props {
   win: Win
@@ -12,9 +11,11 @@ interface Props {
 export function WinDetails(props: Props) {
   const { win } = props
   const winId = win.id
-
+  
+  const deleteWinMutation = useDeleteWin()
+  
   function handleDelete() {
-    deleteWin(winId) 
+    deleteWinMutation.mutate(winId) 
   }
 
 
