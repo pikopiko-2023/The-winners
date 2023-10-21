@@ -8,7 +8,12 @@ export async function getWins(): Promise<Win[]> {
   return response.body.wins
 }
 
-export async function deleteWin(id: Number): Promise<unkown> {
+export async function deleteWin(id: number): Promise<unkown> {
   return request.delete(`${rootUrl}/wins/${id}`)
   
 } 
+
+export async function addWin(win: WinData): Promise<Win> {
+  const response = await request.post(`${rootUrl}/wins`)
+  return response.body.win
+}

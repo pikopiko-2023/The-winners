@@ -1,5 +1,6 @@
 import {useState, useRef} from 'react'
 import {WinData} from '../../models/wins.ts'
+import { useAddWin} from '../hooks/useWins.tsx'
 
 
 function WinForm() {
@@ -21,13 +22,17 @@ function WinForm() {
     const updatedForm = {...form, [name]: value}
     setFormData(updatedForm)
     console.log(updatedForm)
-    
+    }
+
+    function handleSubmit(e) {
+      e.preventDefault()
+      useAddWin.mutate(form)
     }
 
     return (
       <div className='add-win-form win-box'>
         <h1>Add your win</h1>
-        <form aria-label='add-win-form'>
+        <form aria-label='add-win-form' onSubmit={handleSubmit}>
           <label htmlFor='title'>Title:</label>
           <input type="text" onChange={handleChange} value={form.title} name='title' id='title'/><br/>
           <label htmlFor='win'>Win:</label>
@@ -62,9 +67,10 @@ function WinForm() {
           ref={dateInputRef}
         />
         <p>Selected Date: {form.date}</p>
+        <button>Submit</button>
         </form>
       </div>
-    );
-  };
+    )
+  }
   
 export default WinForm  
