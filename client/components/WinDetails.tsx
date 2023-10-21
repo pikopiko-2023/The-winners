@@ -21,8 +21,8 @@ export function WinDetails(props: Props) {
 
   return (
     <>
-      <div className="win-box">
-        <h2>{win.title}</h2>
+      <div className="win-box" role='list-item'>
+        <h2 role='win-title'>{win.title}</h2>
         <p>{win.type}</p>
         <h3>{win.name}</h3>
         <h4>{win.date}</h4>
