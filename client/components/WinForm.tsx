@@ -1,6 +1,6 @@
-import {useState, useRef} from 'react'
-import {WinData} from '../../models/wins.ts'
-import { useAddWin} from '../hooks/useWins.tsx'
+import { useState, useRef } from 'react'
+import { WinData } from '../../models/wins.ts'
+import { useAddWin } from '../hooks/useWins.ts'
 
 
 function WinForm() {
@@ -21,15 +21,18 @@ function WinForm() {
     const {name, value } = e.target
     const updatedForm = {...form, [name]: value}
     setFormData(updatedForm)
-    console.log(updatedForm)
     }
+ 
+    const useAddWinMutation = useAddWin()
 
     function handleSubmit(e) {
       e.preventDefault()
-      useAddWin.mutate(form)
+      useAddWinMutation.mutate(form)
+      
     }
 
-    return (
+    
+        return (
       <div className='add-win-form win-box'>
         <h1>Add your win</h1>
         <form aria-label='add-win-form' onSubmit={handleSubmit}>
@@ -39,12 +42,14 @@ function WinForm() {
           <input type='text' onChange={handleChange} value={form.win} name='win' id='win' /> <br/>
           <label htmlFor="type">Type of win:</label>
           <select id="type" onChange={handleChange} name='type' value={form.type}>
+            <option value="">--Select an option--</option>
             <option value="Dev">Dev</option>
             <option value="Human Skills">Human Skills</option>
             <option value="Life">Life</option>
           </select>
-          <label htmlFor="who">Who:</label>
-          <select id="who" onChange={handleChange} name='who' value={form.who}>
+          <label htmlFor="name">Who:</label>
+          <select id="name" onChange={handleChange} name='name' value={form.who}>
+            <option value=''>--Select an option--</option>
             <option value='Rich'>Rich</option>
             <option value='Jayde'>Jayde</option>
             <option value='Mark'>Mark</option>

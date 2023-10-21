@@ -13,7 +13,7 @@ export async function deleteWin(id: number): Promise<unkown> {
   
 } 
 
-export async function addWin(win: WinData): Promise<Win> {
-  const response = await request.post(`${rootUrl}/wins`)
-  return response.body.win
+export async function addWin(win: WinData): Promise<unkown> {
+  return request.post(`${rootUrl}/wins`).send({...win})
+  
 }
