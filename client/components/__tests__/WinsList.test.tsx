@@ -16,22 +16,7 @@ describe('<WinsList>', () => {
               "date": "2023-09-10",
               "type": "Human Skills"
           },
-          {
-              "id": 6,
-              "name": "Mark",
-              "title": "API Integration",
-              "win": "Integrated a third-party API, and now our app can talk to strangers on the internet.",
-              "date": "2023-09-25",
-              "type": "Dev"
-          },
-          {
-              "id": 7,
-              "name": "Laura",
-              "title": "Conflict Resolution",
-              "win": "Turned a heated debate over tabs versus spaces into a new coffee break tradition.",
-              "date": "2023-09-20",
-              "type": "Human Skills"
-          },]})
+          ]})
 
           renderRoute('/')
 
@@ -51,22 +36,7 @@ describe('<WinsList>', () => {
               "date": "2023-09-10",
               "type": "Human Skills"
           },
-          {
-              "id": 6,
-              "name": "Mark",
-              "title": "API Integration",
-              "win": "Integrated a third-party API, and now our app can talk to strangers on the internet.",
-              "date": "2023-09-25",
-              "type": "Dev"
-          },
-          {
-              "id": 7,
-              "name": "Laura",
-              "title": "Conflict Resolution",
-              "win": "Turned a heated debate over tabs versus spaces into a new coffee break tradition.",
-              "date": "2023-09-20",
-              "type": "Human Skills"
-          },]})
+         ]})
 
           renderRoute('/')
 
@@ -86,5 +56,7 @@ describe('<WinsList>', () => {
         await waitFor(() => {
           expect(screen.queryByText(/Loading/)).not.toBeInTheDocument()
         })
+
+        expect(screen.getByText(/Something went wrong loading our wins/)).toBeInTheDocument()
 }) 
 })

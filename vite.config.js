@@ -10,8 +10,6 @@ export default defineConfig({
     },
   },
   test: {
-    coverage: {
-      provider: 'v8'
-    }
+    setupFiles: ['./client/test-utils.tsx']
   }
 })
