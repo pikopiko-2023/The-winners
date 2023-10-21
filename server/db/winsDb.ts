@@ -24,10 +24,10 @@ export function getWinById(id: number): Promise<Win[]> {
 }
 
 // New Win    
-export function addWin(win: WinData): Promise<Win> {
-  return connection<Win>('wins') 
+export function addWin(win: WinData): Promise<Win[]> {
+  return connection('wins') 
     .insert({ ...win }) 
-    .returning(['id', 'name', 'title', 'win', 'date', 'type' ]) 
+    .returning([ 'id', 'name', 'title', 'win', 'date', 'type' ]) 
 }
 
 // A function to update a url by its ID, to be called when a PATCH request is made to the 'api/v1/wins/2' endpoint.
@@ -36,7 +36,7 @@ export function updateWin(id: number, updatedData: WinData) {
     .where({ id }) // Finding the win with the specified ID in the 'wins' table.
     .update({ ...updatedData }) // Updating the found url with the new data provided. The '...' is the spread operator, which is used to expand the properties of the 'updatedData' object into individual key-value pairs within the new object passed to the update method.
     .returning([
-      // Specifying the columns to return after the update operation.
+      // Specifying the columns to return after the update operation. By default it wont necessarily return what you need, so it is better to specify
       'id',
       'name',
       'title',
