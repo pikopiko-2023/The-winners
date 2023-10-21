@@ -14,19 +14,19 @@ import {
   updateWin
 } from './winsDb.ts'
 
-import { WinData } from '../../models/wins.ts'
+import { WinData, Win } from '../../models/wins.ts'
 
-// A hook to run once before all the tests in this suite, to prepare the database.
+// A function to run once before all the tests in this suite, to prepare the database.
 beforeAll(async () => {
   await connection.migrate.latest() // Running all pending migrations to bring the DB schema up to date.
 })
 
-// A hook to run before each test in this suite, to seed the database with initial data.
+// A function to run before each test in this suite, to seed the database with initial data.
 beforeEach(async () => {
   await connection.seed.run() // Running seed files to populate the database with data.
 })
 
-// A hook to run once after all the tests in this suite, to clean up resources.
+// A function to run once after all the tests in this suite, to clean up resources.
 afterAll(async () => {
   await connection.destroy() // Destroying the database connection to clean up.
 })
@@ -35,19 +35,19 @@ afterAll(async () => {
 describe('getAllWins', () => {
   // Defining a single test within the suite.
   it('returns the correct wins array', async () => {
-    const urls = await getAllWins() // Calling the function to be tested and awaiting its result.
+    const winsArray = await getAllWins() // Calling the function to be tested and awaiting its result.
 
     // Making assertions about the result.
-    expect(urls).toHaveLength(15) // Expecting the result to be an array of length 3.
-    expect(urls[0]).toHaveProperty('name') // Expecting the first object in the array to have a 'url' property.
-    expect(urls[1].name).toBe('Hope') // Expecting the 'name' property of the second object to be 'Soundcloud'.
+    expect(winsArray).toHaveLength(15) // Expecting the result to be an array of length 15.
+    expect(winsArray[0]).toHaveProperty('name') // Expecting the first object in the array to have a 'name' property.
+    expect(winsArray[1].name).toBe('Hope') // Expecting the 'name' property of the second object to be 'Hope'.
   })
 })
 
 describe('newWin', () => {
   it('adds a new win and returns it', async () => {
     // Fetch the initial set of wins before adding a new one.
-    const initialWins = await getAllWins()
+    const initialWins = await getAllWins() // as an array because most db's do it this way
 
     const newWinData = {
       name: 'Mark',
@@ -58,7 +58,7 @@ describe('newWin', () => {
     }
 
     // Call the function to be tested, passing the new URL data.
-    const addedWinArray: WinData[] = await addWin(newWinData)
+    const addedWinArray: Win[] = await addWin(newWinData)
     const addedWin = addedWinArray[0]
 
     // Assert that the function returns an object with the expected properties.
@@ -86,7 +86,7 @@ describe('deleteWin', () => {
       type: 'dev madness',
     }
     const addedWinArray = await addWin(newWinData)
-    const addedWin = addedWinArray[0]
+    const addedWin = addedWinArray[0] 
 
     // Act: Call the function to be tested.
     const result = await deleteWin(addedWin.id)
